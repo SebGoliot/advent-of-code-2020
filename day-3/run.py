@@ -5,12 +5,20 @@ def parse_input():
 
 input = parse_input()
 
-def toboggan_trees(input):
+def toboggan_trees(input, right, down):
     h_pos, trees = 0, 0
-    for line in input:
+    for v_pos in range(0, len(input), down):
+        line = input[v_pos]
         if line[h_pos] == '#':
             trees += 1
-        h_pos = (h_pos + 3) % len(line)
+        h_pos = (h_pos + right) % len(line)
     return trees
 
-print(toboggan_trees(input))
+x = 1
+x *= toboggan_trees(input, right=1, down=1)
+x *= toboggan_trees(input, right=3, down=1)
+x *= toboggan_trees(input, right=5, down=1)
+x *= toboggan_trees(input, right=7, down=1)
+x *= toboggan_trees(input, right=1, down=2)
+
+print(x)
