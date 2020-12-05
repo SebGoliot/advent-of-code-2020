@@ -10,6 +10,23 @@ def parse_input():
 def get_seat_id(seat):
     row = int(seat[0], 2)
     col = int(seat[1], 2)
-    return (row * 8) + col
+    return int((row * 8) + col)
 
-print(max([get_seat_id(x) for x in parse_input()]))
+def ordered_ids(input):
+    ids = [get_seat_id(x) for x in parse_input()]
+    ids.sort()
+    return ids
+
+ordered_seat_ids = ordered_ids(parse_input())
+
+print("highest seat id:", max(ordered_seat_ids))
+
+def get_missing_seat_id(ordered_seat_ids):
+    for id in range(len(ordered_seat_ids)):
+        try:
+            if ordered_seat_ids[id+1] != ordered_seat_ids[id] + 1:
+                return ordered_seat_ids[id] + 1
+        except:
+            pass
+
+print("missing seat id:", get_missing_seat_id(ordered_seat_ids))
