@@ -19,3 +19,20 @@ def get_sum_of_distinct_yes(input):
     return sum
 
 print(get_sum_of_distinct_yes(input))
+
+
+def get_sum_of_same_answers(input):
+    count, start, sets = 0, True, set()
+    for line in input:
+        if line == '':
+            count += len(sets)
+            sets, start = set(), True
+        else:
+            if start:
+                sets, start = set(line), False
+            else:
+                sets.intersection_update(set(line))
+    count += len(sets)
+    print(count)
+
+get_sum_of_same_answers(input)
